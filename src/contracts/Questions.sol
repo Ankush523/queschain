@@ -5,6 +5,7 @@ contract Questions{
 
     uint qid;
     uint aid;
+    uint upvote;
     struct Question_maker{
         uint qid;
         address question_maker;
@@ -12,8 +13,8 @@ contract Questions{
     }
 
     struct Answer_giver{
-        uint aid;
         string answer;
+        uint upvote;
     }
 
     mapping(uint => Question_maker) questions;
@@ -27,5 +28,12 @@ contract Questions{
     {
         return questions[_qid];
     }
-    
+
+    function giveAnswer(uint _aid,string memory _answer) external{
+        answers[_aid]=Answer_giver(_answer,upvote);
+    }
+
+    function upVote_value(uint _aid) external{
+        answers[_aid].upvote++;
+    }
 }
